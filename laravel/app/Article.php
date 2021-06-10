@@ -15,4 +15,12 @@ class Article extends Model
         return $this->belongsTo('App\User');
     }
     //==========ここまで追加==========
+
+    //==========ここから追加========== 
+    public function create()
+    {
+        return view('articles.create');    
+    }
+    //==========ここまで追加==========
+    
 }
