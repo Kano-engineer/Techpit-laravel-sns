@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true; //-- この行を変更
     }
 
     /**
@@ -24,7 +24,20 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            //==========ここから追加==========
+            'title' => 'required|max:50',
+            'body' => 'required|max:500',
+            //==========ここまで追加==========
         ];
     }
+    
+    //==========ここから追加==========
+    public function attributes()
+    {
+        return [
+            'title' => 'タイトル',
+            'body' => '本文',
+        ];
+    }
+    //==========ここまで追加==========
 }
