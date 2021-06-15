@@ -44,4 +44,18 @@ class ArticleController extends Controller
     }
     //==========ここまで追加==========
 
+    //==========ここから追加==========
+    public function update(ArticleRequest $request, Article $article)
+    {
+        $article->fill($request->all())->save();
+        return redirect()->route('articles.index');
+    }
+
+    //==========ここから追加==========
+    public function destroy(Article $article)
+    {
+        $article->delete();
+        return redirect()->route('articles.index');
+    }
+    //==========ここまで追加==========
 }
