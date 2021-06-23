@@ -1,5 +1,10 @@
 /node_modules
+/public/css #==========この行を追加
 /public/hot
+#==========ここから追加==========
+/public/js  
+/public/mix-manifest.json
+#==========ここまで追加==========
 /public/storage
 /storage/*.key
 /vendor
