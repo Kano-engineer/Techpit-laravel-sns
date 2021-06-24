@@ -1,4 +1,3 @@
-//==========ここから追加==========
 import './bootstrap'
 import Vue from 'vue'
 import ArticleLike from './components/ArticleLike'
@@ -9,4 +8,3 @@ const app = new Vue({
     ArticleLike,
   }
 })
-//==========ここまで追加==========
