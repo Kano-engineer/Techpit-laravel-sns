@@ -22,5 +22,10 @@ class Article extends Model
         return $this->belongsTo('App\User');
     }
     //==========ここまで追加==========
-    
+    //===========ここから追加===========
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
+    //===========ここまで追加===========
 }
