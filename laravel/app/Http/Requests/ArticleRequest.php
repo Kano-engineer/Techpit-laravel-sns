@@ -24,20 +24,32 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            //==========ここから追加==========
             'title' => 'required|max:50',
             'body' => 'required|max:500',
+            //==========ここから追加==========
+            'tags' => 'json|regex:/^(?!.*\s).+$/u|regex:/^(?!.*\/).*$/u',
             //==========ここまで追加==========
         ];
     }
     
-    //==========ここから追加==========
     public function attributes()
     {
         return [
             'title' => 'タイトル',
             'body' => '本文',
+            //==========ここから追加==========
+            'tags' => 'タグ',
+            //==========ここまで追加==========
         ];
     }
-    //==========ここまで追加==========
+    //==========ここから追加==========
+    public function passedValidation()
+    {
+        $this->tags = collect(json_decode($this->tags))
+            ->slice(0, 5)
+            ->map(function ($requestTag) {
+                return $requestTag->text;
+            });
+    }
+    //==========ここから追加==========
 }
