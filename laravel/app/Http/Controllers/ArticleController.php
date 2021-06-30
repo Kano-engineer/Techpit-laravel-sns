@@ -7,6 +7,7 @@ use App\Http\Requests\ArticleRequest;
 //===========ここまで追加==========
 //==========ここから追加==========
 use App\Article;
+use App\Tag;
 //==========ここまで追加==========
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class ArticleController extends Controller
         $this->authorizeResource(Article::class, 'article');
     }
     //==========ここまで追加========== 
-    
+
     public function index()
     {
         //==========ここから追加==========
@@ -39,6 +40,12 @@ class ArticleController extends Controller
         $article->fill($request->all()); //-- この行を追加
         $article->user_id = $request->user()->id;
         $article->save();
+
+        $request->tags->each(function ($tagName) use ($article) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $article->tags()->attach($tag);
+        });
+        
         return redirect()->route('articles.index');
     }
     //==========ここまで追加==========
