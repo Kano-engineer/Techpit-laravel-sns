@@ -1,12 +1,10 @@
 <template>
   <div>
-    <!----------ここから追加---------->  
     <input
       type="hidden"
       name="tags"
       :value="tagsJson"
     >
-    <!----------ここまで追加---------->
     <vue-tags-input
       v-model="tag"
       :tags="tags"
@@ -24,10 +22,18 @@ export default {
   components: {
     VueTagsInput,
   },
+  //----------ここから追加----------
+  props: {
+    initialTags: {
+      type: Array,
+      default: [],
+    },
+  },
+  //----------ここまで追加----------
   data() {
     return {
       tag: '',
-      tags: [],
+      tags: this.initialTags, //----------この行を変更
       autocompleteItems: [{
         text: 'Spain',
       }, {
@@ -47,14 +53,13 @@ export default {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
     },
-    //==========ここから追加==========
     tagsJson() {
       return JSON.stringify(this.tags)
     },
-    //==========ここまで追加==========
   },
 };
 </script>
+
 <style lang="css" scoped>
   .vue-tags-input {
     max-width: inherit;
